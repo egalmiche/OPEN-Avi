@@ -1,6 +1,6 @@
 ---
-title: Compilation de données Coucou les loulous !
-author: Par Anne ONYME
+title: Compilation de données
+author: Par le groupe 1 (Les apprentis d'Avignon)
 date: 
 output:
   html_document:
@@ -26,28 +26,33 @@ library(factoextra)
 library(tibble)
 ```
 
-```{r logo, echo=FALSE, out.width = '100%', fig.align = "center",fig.cap="Logo Rmarkdown"}
+```{r logo, echo=FALSE, out.width = '65%', fig.align = "center",fig.cap="Logo Rmarkdown"}
 knitr::include_graphics("rmarkdown.png")
 ```
 
 &nbsp;
 
-*Résumé* : Dans ce rapport nous analyserons les temperatures des principales villes françaises.  
+**Résumé :** 
+
+Dans ce rapport nous analyserons les temperatures des principales villes françaises.  
 
 
 &nbsp;
 
- **Présentation des données **
- Les données sont téléchargeables directement sur [ce site](https://husson.github.io/data.html) ou peuvent être importée directement sous R avec : 
+ **Présentation des données :**
  
-```{r datatemp, echo = TRUE}
+Les données sont téléchargeables directement sur [ce site](https://husson.github.io/data.html) ou peuvent être importée directement sous R avec : 
+ 
+```{r datatemp, echo = F}
 link <- "http://factominer.free.fr/course/donnees/AnaDo_JeuDonnees_TemperatFrance.csv"
 datatemp <- read.table(link, h=TRUE, sep=";", dec=".", row.names=1, encoding="latin1")
 ```
 
 
 
- **Les données**
+
+ **Les données :**
+ 
 
 ```{r datatemp1, echo = FALSE,eval=TRUE}
 head(datatemp)
@@ -62,8 +67,8 @@ med<-tapply(temp,villes,mean)
 &nbsp;
 
 Le jeu de données est complété pour `r nrow(datatemp)` villes et contient  `r ncol(datatemp)` variables dont les tempértures des 12 mois de l'année, la moyenne, l'amplitude, latitude et longitude ainsi qu'un indicateur de grandes régions.
-La temperature moyenne en France est égale à `r round(mean(unlist(datatemp[,1:12])),2)` $+/-$ `r round(sd(unlist(datatemp[,1:12])),2)` degrés Celcius (moyenne $+/-$ écart type). La ville la plus froide est : `r names(med[med==min(med)])` ; et la ville la plus chaudes est : `r names(med[med==max(med)])` (Fig. \ref{fig:tempvilles}).
- 
+La temperature moyenne en France est égale à `r round(mean(unlist(datatemp[,1:12])),2)` $+/-$ `r round(sd(unlist(datatemp[,1:12])),2)` °C (moyenne $+/-$ écart type). La ville la plus froide est : `r names(med[med==min(med)])` ; et la ville la plus chaude est : `r names(med[med==max(med)])`.
+
 ```{r datatempville, echo = F, eval=T, fig.height = 5, fig.width = 6, fig.align = "center", fig.cap="Températures moyenne par villes\\label{fig:tempvilles}"}
 villes2<-factor(villes,levels(villes)[order(med)])
 boxplot(temp~villes2,las=2,col="blue",ylab="Températures mensuelles",cex.lab=0.7,cex.axis=0.7, xlab = "Villes")
@@ -76,14 +81,16 @@ Nous réalisons des graphiques permettant d'analyser, par région :
 
 * La position globale de la températures vis à vis de la moyenne nationale.
 
-  L'évolution mensuelle des températures dont notament : 
+*  L'évolution mensuelle des températures dont notament : 
   
-  L'amplitude :
-    + L'hétérogénéité inter-villes.
+*  L'amplitude : l'hétérogénéité inter-villes.
 
-# **Création d'une fonction graphique**
+## **Création d'une fonction graphique**
 
-Nous souhaitons produire un graphique representant par région les courbes mensuelles de chaque ville avec la courbe moyenne nationale. Voici un script possible : 
+Nous souhaitons produire un graphique représentant par région les courbes mensuelles de chaque ville avec la courbe moyenne nationale. 
+
+Voici un script possible et son application : 
+
 ```{r functemp, echo = F,eval=T}
 Tplot<-function(tempr,tmean) {
   plot(c(1,12),c(-10,30),type="n",ylab="Temperature (°C)",xlab="Mois",cex.lab=0.8,cex.axis=0.8)
@@ -93,8 +100,6 @@ Tplot<-function(tempr,tmean) {
 }
 ```
 
-
- *Application*
 
 ```{r graphtemp, echo = T,eval=T,fig.height = 5, fig.width = 6,fig.cap="Courbes de températures mensuelles par régions", fig.align = "center",}
 #température moyenne
@@ -107,10 +112,14 @@ par(mfrow=c(2,2),mar=c(3,3,1,1),mgp=c(2,1,0))
 plot<-lapply(sptemp,Tplot,tmean)
 #Légende
 legend(4,0,"Moyennes nationales",bty="n",col="blue",lwd=2,cex=0.7)
+
 ```
 
+ 
 
-**Interpretation**: Nous observons que ...........................................................................................
+**Interprétation**: 
+
+Nous observons que ...........................................................................................
 ..................................................................................................................
 ...........................................................................................
 
@@ -120,9 +129,9 @@ legend(4,0,"Moyennes nationales",bty="n",col="blue",lwd=2,cex=0.7)
 
 ## **Rappels**
 
-Une ACP permet d'analyser simulatnément les liens entre de multiples variables quantitatives et d'analyser les positions des individus statistiques vis à vis de l'ensemble de ces variables. Elle est basée sur la recheches d'axes principaux indépendants, chacuns plus ou moins liés aux variables d'entrées. Le première axe explique un maximum d'intertie, le second une moindre partie et ainsi de suite. Pour rappel l'intertie totale se calcul par : 
+Une ACP permet d'analyser simulatnément les liens entre de multiples variables quantitatives et d'analyser les positions des individus statistiques vis à vis de l'ensemble de ces variables. Elle est basée sur la recheches d'axes principaux indépendants, chacun plus ou moins lié aux variables d'entrées. Le premier axe explique un maximum d'inertie, le second une moindre partie et ainsi de suite. Pour rappel l'inertie totale se calcule par : 
 $$I=\sum^N_{i=1}\frac{1}{N}d^2_{(e_i;g)}$$
-Avec : $d^2_{e_i,g}=\sum^p_{j=1}x^2_{ij}$ = Distance euclidienne au centre de gravité du nuage de point (soit $(0;0)$) avec des données centrée et normées. 
+Avec : $d^2_{e_i,g}=\sum^p_{j=1}x^2_{ij}$ = Distance euclidienne au centre de gravité du nuage de point, (soit $(0;0)$) avec des données centrée et normées. 
 
 
 ## **Les valeurs propres**
