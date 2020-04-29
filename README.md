@@ -1,34 +1,23 @@
-# OPEN-exo
-Documents pour des exercices du module OPEN
-
-Histoire de manipuler git, markdown, R et Rmarkdown...
+# OPEN-avi
 
 Procédure pour le travail de groupe :
 
-Faire un pull pour avoir la derniere version de rapport_bad3.Rmd
-Copier ce fichier dans un dossier perso
-le modifier
+Avant d'entamer de bosser :
+- Faire un pull (git pull) en faisant attention de bien être dans le dossier OPEN-Avi pour avoir la derniere version de rapport_bad3.Rmd
+- Copier ce fichier dans un dossier perso genre pour moi rapport_bad3DCV1.Rmd
+- Le modifier sur le fichier perso
 
-Pour soumettre la modif :
+Pour soumettre la modif (quand elle marche et que c'est testé) :
 
-Prévenir les autres qu'ils ne fassent aucun Push
-
-Faire un pull et ouvrir la derniere version de rapport_bad3.Rmd
-
-Copier la partie du code du fichier perso sur le fichier bad3 du dépot git
-
-Faire un commit avec en commentaire les modifs apportées
-
-Faire un push.
+- Prévenir les autres qu'on va push qu'ils ne fassent aucun Push eux
+- Faire un pull et ouvrir la derniere version de rapport_bad3.Rmd
+- Copier la partie du code du fichier perso sur le fichier rapport_bad3.Rmd
+- Faire un git add rapport_bad3.Rmd 
+- Fait un commit (git commit -m "Ton commentaire ici") avec en commentaire les modifs apportées
+- Faire un push (git push).
  
+Adresse pour le clone :
+git clone https://github.com/egalmiche/OPEN-avi.git
 
-git clone https://github.com/vnzPayet/OPEN-exo.git
 
-Puis tenter l'exercice de construction et d'amélioration du document.
-
-## Le travail collabortif :
-0/ demander à être ajouter comme collaborateur sur le chat
-1/ récupérer la dernière version avec git pull
-2/ insérer vos modifs dans le fichier rapport_bad1.Rmd
-3/ faire les étapes add/commit et push
     
