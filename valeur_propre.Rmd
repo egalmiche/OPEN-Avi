@@ -1,0 +1,5 @@
+```{r valp, echo = T,eval=T,fig.cap="Valeurs propres",fig.height = 3, fig.align = "center",fig.width = 7}
+res <- PCA(datatemp, quanti.sup=13:16, quali.sup=17,graph=F)
+par(mfrow=c(1,1),mar=c(4,4,2,2))
+barplot(res$eig[,2],ylab="Inertie %",names.arg = paste("Axe",1: nrow(res$eig)),las=2,cex.axis=0.9,cex.lab=1, ylim = c(0,90), xlim = c(0,5.5))
+```
