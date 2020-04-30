@@ -1,4 +1,5 @@
 ## **Les valeurs propres**
+Co-Authored-By: annepntl <apinatel@etu.isara.fr>
 
 Elles permettent de determiner la proportion d'intertie expliquée par chacuns des axes.  
 
