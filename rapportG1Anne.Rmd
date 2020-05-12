@@ -13,7 +13,6 @@ output:
     toc: yes
     toc_depth: 3
 bibliography: biblio2.bib
-csl: iso690-author-date-fr-no-abstract.csl
 ---
 
 ```{r setup, include=FALSE}
